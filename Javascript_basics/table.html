@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #mtable {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 40%;
+        position: relative;
+        left: 300px;
+        padding: 200px;
+      }
+
+      #mtable td,
+      #mtable th {
+        border: 1px solid #ddd;
+        padding: 20px;
+      }
+      #container {
+      }
+      #result {
+        display: block;
+      }
+
+      #mtable tr:nth-child(even) {
+        background-color: #34a375;
+      }
+
+      #mtable tr:hover {
+        background-color: #f5deb3;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Generate Table</h2>
+    <label>Enter Number</label>
+    <input type="number" id="number" />
+    <label>Enter The limit</label>
+    <input type="number" id="numberLimit" />
+    <input type="button" value="generate" onclick="multiplicationTable()" />
+    <br /><br /><br />
+    <div id="container">
+      <div id="result"></div>
+      <div id="result1"></div>
+    </div>
+
+    <script>
+      function multiplicationTable() {
+        var table;
+        table = '<table id="mtable">';
+
+        var num = document.getElementById("number").value;
+        var limit = document.getElementById("numberLimit").value;
+        if (num == null || num == "") num = 5;
+        for (i = 1; i <= limit; i++) {
+          table += "<tr><td>" + num + "*" + i + "=" + num * i + "</td></tr>";
+        }
+
+        table += "</table>";
+        document.getElementById("result").innerHTML = table;
+        document.getElementById("result1").innerHTML = table;
+        fetch("https://api.ipify.org?format=json")
+          .then((data1) => {
+            console.log(data1);
+            document.getElementById("result1").innerHTML = data1.body;
+          });
+      }
+    </script>
+  </body>
+</html>
